@@ -1,5 +1,10 @@
 package com.example.jobportal.demojobportal;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+//@Entity
+//@Table(name = "employee")
 // Creating an entity Employee
 public class Employee {
 

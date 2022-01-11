@@ -15,12 +15,12 @@ public class DemojobportalApplication {
 		SpringApplication.run(DemojobportalApplication.class, args);
 	}
 
-//	@GetMapping("/hello")
-////	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-//		public String hello() {
-//		return "SamplePage";
-//		//return "Hello s!";
-//	}
+	@GetMapping("/")
+//	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
+		public String hello() {
+		return "SamplePage";
+		//return "Hello s!";
+	}
 
 	//EmployeeController ec = new EmployeeController();
 
