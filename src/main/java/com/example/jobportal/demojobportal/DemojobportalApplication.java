@@ -15,13 +15,9 @@ public class DemojobportalApplication {
 		SpringApplication.run(DemojobportalApplication.class, args);
 	}
 
+	//Landing Page
 	@GetMapping("/")
-//	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		public String hello() {
-		return "SamplePage";
-		//return "Hello s!";
+		return "Hello";
 	}
-
-	//EmployeeController ec = new EmployeeController();
-
 }

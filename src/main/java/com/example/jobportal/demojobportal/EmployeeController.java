@@ -31,7 +31,6 @@ public class EmployeeController {
     {
         return employeeDao.getAllEmployees();
     }
-
     // Create a POST method to add an employee to the list
     @PostMapping(
             path = "/",
@@ -70,6 +69,5 @@ public class EmployeeController {
     public void deleteEmployee(@PathVariable int id) {
         employeeDao.deleteEmployeeRecord(id);
     }
-
 }
 
