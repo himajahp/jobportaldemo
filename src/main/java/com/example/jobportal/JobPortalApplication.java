@@ -2,8 +2,6 @@ package com.example.jobportal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @SpringBootApplication
 public class JobPortalApplication {
@@ -11,7 +9,7 @@ public class JobPortalApplication {
         SpringApplication.run(JobPortalApplication.class, args);
     }
 
-////    //Landing Page
+//////    //Landing Page
 //    @GetMapping("/")
 //    public String hello() {
 //        return "Hello";

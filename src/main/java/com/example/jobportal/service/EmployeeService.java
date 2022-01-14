@@ -14,15 +14,22 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public String viewHomePage() {
-        return "Hello";
+        return "Welcome to the Job Portal!";
     }
 
+    //get all employees
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
+    //add single employee
     public void saveEmployee(Employee employee) {
         employeeRepository.save(employee);
+    }
+
+    //add list of employees
+    public void saveEmployees(List<Employee> employees) {
+        this.employeeRepository.saveAll(employees);
     }
 
     public Employee getEmployeeById(int id) {
@@ -37,4 +44,15 @@ public class EmployeeService {
     }
 
     public void deleteEmployeeById(int id) { this.employeeRepository.deleteById(id); }
+
+    //update employee details
+    public Employee updateEmployeeDetails(Employee employee) {
+        Employee emp = employeeRepository.findById(employee.getEmp_id()).orElse(null);
+        emp.setEmp_id(employee.getEmp_id());
+        emp.setFirst_name(employee.getFirst_name());
+        emp.setLast_name(employee.getLast_name());
+        emp.setEmail(employee.getEmail());
+        emp.setRole(employee.getRole());
+        return this.employeeRepository.save(emp);
+    }
 }
