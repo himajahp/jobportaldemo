@@ -9,9 +9,4 @@ public class JobPortalApplication {
         SpringApplication.run(JobPortalApplication.class, args);
     }
 
-//////    //Landing Page
-//    @GetMapping("/")
-//    public String hello() {
-//        return "Hello";
-//    }
 }

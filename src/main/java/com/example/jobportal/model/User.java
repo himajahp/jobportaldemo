@@ -14,10 +14,11 @@ public class User {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
-    @Column(name = "user_name")
-    private String user_name;
+    @Column(name = "user_fname")
+    private String user_fname;
+    @Column(name = "user_lname")
+    private String user_lname;
     private String user_password;
-
     private boolean enabled;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -28,9 +29,13 @@ public class User {
 
     public void setUser_id(int user_id) { this.user_id = user_id; }
 
-    public String getUser_name() { return user_name; }
+    public String getUser_fname() { return user_fname; }
 
-    public void setUser_name(String user_name) { this.user_name = user_name; }
+    public void setUser_fname(String user_fname) { this.user_fname = user_fname; }
+
+    public String getUser_lname() { return user_lname; }
+
+    public void setUser_lname(String user_lname) { this.user_lname = user_lname; }
 
     public String getUser_password() { return user_password; }
 

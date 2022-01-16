@@ -4,33 +4,26 @@ import com.example.jobportal.model.Employee;
 import com.example.jobportal.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EmployeeService {
+
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public String viewHomePage() {
-        return "Welcome to the Job Portal!";
-    }
-
     //get all employees
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
-    }
+    public List<Employee> getAllEmployees() { return this.employeeRepository.findAll(); }
 
     //add single employee
-    public void saveEmployee(Employee employee) {
-        employeeRepository.save(employee);
-    }
+    public void saveEmployee(Employee employee) { employeeRepository.save(employee); }
 
     //add list of employees
-    public void saveEmployees(List<Employee> employees) {
-        this.employeeRepository.saveAll(employees);
-    }
+    public void saveEmployees(List<Employee> employees) { this.employeeRepository.saveAll(employees); }
+
+    //delete employee by id
+    public void deleteEmployeeById(int id) { this.employeeRepository.deleteById(id); }
 
     public Employee getEmployeeById(int id) {
         Optional<Employee> optional = employeeRepository.findById(id);
@@ -42,8 +35,6 @@ public class EmployeeService {
         }
         return employee;
     }
-
-    public void deleteEmployeeById(int id) { this.employeeRepository.deleteById(id); }
 
     //update employee details
     public Employee updateEmployeeDetails(Employee employee) {

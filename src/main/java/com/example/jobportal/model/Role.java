@@ -1,7 +1,5 @@
 package com.example.jobportal.model;
 
-import lombok.extern.apachecommons.CommonsLog;
-
 import javax.persistence.*;
 
 @Entity
