@@ -20,10 +20,13 @@ public class User {
     private String user_lname;
     private String user_password;
     private boolean enabled;
+    private String roles;
+    private String email;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn (name = "user_id"), inverseJoinColumns = @JoinColumn (name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(name = "users_roles", joinColumns = @JoinColumn (name = "user_id"), inverseJoinColumns = @JoinColumn (name = "role_id"))
+//    private Set<Role> roles = new HashSet<>();
 
     public int getUser_id() { return user_id; }
 
@@ -41,11 +44,16 @@ public class User {
 
     public void setUser_password(String user_password) { this.user_password = user_password; }
 
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
+
     public boolean isEnabled() { return enabled; }
 
     public void setEnabled(boolean enabled) { this.enabled = enabled; }
 
-    public Set<Role> getRoles() { return roles; }
+    public String getRoles() { return roles; }
 
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
+    public void setRoles(String roles) { this.roles = roles; }
+
 }

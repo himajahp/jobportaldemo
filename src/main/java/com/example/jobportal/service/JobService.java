@@ -1,7 +1,9 @@
 package com.example.jobportal.service;
 
 import com.example.jobportal.model.Job;
+import com.example.jobportal.model.UserJob;
 import com.example.jobportal.repository.JobRepository;
+import com.example.jobportal.repository.UserJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.Optional;
 public class JobService {
     @Autowired
     private JobRepository jobRepository;
+    @Autowired
+    private UserJobRepository userJobRepository;
 
     //get all jobs
     public List<Job> getAllJobs() { return this.jobRepository.findAll(); }
@@ -39,18 +43,31 @@ public class JobService {
         this.jobRepository.save(job);
     }
 
+    //Get job by company
+    public List<Job> getJobByCompany(String company) {
+        return this.jobRepository.getJobByCompany(company);
+    }
+
     //update job
-    public void updateJob(Job job) {
+    public Job updateJob(Job job) {
         Job job1 = this.jobRepository.getById(job.getJob_id());
         job1.setDescription(job.getDescription());
         job1.setJob_role(job.getJob_role());
-        job1.setJob_id(job.getJob_id());;
+        job1.setJob_id(job.getJob_id());
         job1.setTitle(job.getTitle());
         job1.setApply_by_date(job.getApply_by_date());
+        return this.jobRepository.save(job1);
     }
 
     //delete job
     public void deleteJob(int id) {
         this.jobRepository.deleteById(id);
     }
+
+    //apply for a job
+    public void applyForJob(UserJob userJob) {
+        this.userJobRepository.save(userJob);
+    }
+
+
 }

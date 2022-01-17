@@ -27,6 +27,17 @@ public class Job {
     @Column(name = "apply_by_date")
     private Date apply_by_date;
 
+    @Column(name = "company")
+    private String company;
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     public Integer getJob_id() {
         return job_id;
     }

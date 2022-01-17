@@ -4,6 +4,10 @@ import com.example.jobportal.model.Employee;
 import com.example.jobportal.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -20,7 +24,7 @@ public class EmployeeController {
     }
 
     // Add new employee
-    @PostMapping( path = "/admin/addEmployee",
+    @PostMapping( path = "/addEmployee",
             consumes = "application/json",
             produces = "application/json")
     public List<Employee> saveEmployee(@RequestBody Employee employee) {
@@ -30,7 +34,7 @@ public class EmployeeController {
     }
 
     // Add new employees
-    @PostMapping( path = "/admin/addEmployees",
+    @PostMapping( path = "/addEmployees",
             consumes = "application/json",
             produces = "application/json")
     public List<Employee> saveEmployees(@RequestBody List<Employee> employees) {
@@ -51,6 +55,13 @@ public class EmployeeController {
     public Employee updateEmployee(@RequestBody Employee employee) {
         this.employeeService.updateEmployeeDetails(employee);
         return this.employeeService.getEmployeeById(employee.getEmp_id());
+    }
+
+    // send email
+    @RequestMapping(value = "/sendemail")
+    public String sendEmail() throws AddressException, MessagingException, IOException {
+        this.employeeService.sendmail();
+        return "Email sent successfully";
     }
 
 }

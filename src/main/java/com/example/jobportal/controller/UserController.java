@@ -22,7 +22,7 @@ public class UserController {
     }
 
     // Add new user
-    @PostMapping( path = "/admin/addUser",
+    @PostMapping( path = "/addUser",
             consumes = "application/json",
             produces = "application/json")
     public List<User> saveUser(@RequestBody User user) {

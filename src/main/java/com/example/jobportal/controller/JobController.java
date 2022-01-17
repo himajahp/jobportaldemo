@@ -1,6 +1,7 @@
 package com.example.jobportal.controller;
 
 import com.example.jobportal.model.Job;
+import com.example.jobportal.model.UserJob;
 import com.example.jobportal.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -14,26 +15,32 @@ public class JobController {
     private JobService jobService;
 
     @GetMapping("/alljobs")
-    public String getAllJobs(Model model) {
+    public List<Job> getAllJobs(Model model) {
         List<Job> jobs = this.jobService.getAllJobs();
         model.addAttribute("job", jobs);
-        return "AllJobs";
+        return jobs;
     }
 
     // job by id
-    @GetMapping("/getjobbyid/{id}")
-    public String getJobById(@PathVariable( value = "id") int id, Model model) {
+    @GetMapping(path = "/getjobbyid/{id}")
+    public Job getJobById(@PathVariable( value = "id") int id, Model model) {
         Job job = this.jobService.getJobById(id);
         model.addAttribute("job", job);
-        return "Job";
+        return job;
     }
 
-    // job by name
-    @GetMapping("/getjobbyname/{title}")
-    public String getJobById(@PathVariable( value = "title") String title, Model model) {
+    // job by title
+    @GetMapping(path = "/getjobbyname/{title}")
+    public Job getJobById(@PathVariable( value = "title") String title, Model model) {
         Job job = this.jobService.getJobByName(title);
         model.addAttribute("job", job);
-        return "Job";
+        return job;
+    }
+
+    // job by company name
+    @GetMapping(path = "/getjobbycompany/{company}")
+    public List<Job> getJobByCompany(@PathVariable(value = "company") String company) {
+        return this.jobService.getJobByCompany(company);
     }
 
     // add new job
@@ -45,11 +52,19 @@ public class JobController {
         return this.jobService.getAllJobs();
     }
 
+    // apply for job
+    @PostMapping(path = "/applyforjob",
+            consumes = "application/json",
+            produces = "application/json")
+    public List<Job> applyForJob(@RequestBody UserJob userJob) {
+        this.jobService.applyForJob(userJob);
+        return this.jobService.getAllJobs();
+    }
+
     // edit a job
     @PutMapping(path = "/updatejob")
     public Job updateJob(@RequestBody Job job, Model model) {
-        this.jobService.updateJob(job);
-        return this.jobService.getJobById(job.getJob_id());
+        return this.jobService.updateJob(job);
     }
 
     // delete job

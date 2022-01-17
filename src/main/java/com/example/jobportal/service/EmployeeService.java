@@ -4,8 +4,14 @@ import com.example.jobportal.model.Employee;
 import com.example.jobportal.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 @Service
 public class EmployeeService {
@@ -45,5 +51,35 @@ public class EmployeeService {
         emp.setEmail(employee.getEmail());
         emp.setRole(employee.getRole());
         return this.employeeRepository.save(emp);
+    }
+
+    //send an email
+    public void sendmail() throws AddressException, MessagingException, IOException {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("myemail@gmail.com", "password");
+            }
+        });
+        Message msg = new MimeMessage(session);
+        msg.setFrom(new InternetAddress("myemail@gmail.com", false));
+
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("myemail@gmail.com"));
+        msg.setSubject("Sample Email Subject");
+        msg.setContent("This is the text for sample email.", "text/html");
+        msg.setSentDate(new Date());
+
+        MimeBodyPart messageBodyPart = new MimeBodyPart();
+        messageBodyPart.setContent("This is the text for sample email.", "text/html");
+
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(messageBodyPart);
+        msg.setContent(multipart);
+        Transport.send(msg);
     }
 }
