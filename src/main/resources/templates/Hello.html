@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Job Portal</title>
@@ -10,7 +9,7 @@
 <body>
     <div class="container">
         <div th:insert="Navbar :: Navbar"></div>
-        <H4 style="text-align: center;">Welcome to the Job Portal!</H4>
+        <H4 style="text-align: center;">Welcome to the Job Portal!!!!!</H4>
 
         <div th:insert="LoginForm :: LoginForm" style="margin-top: 20px;"></div>
         <button th:href="@{/jobsearch}">button</button>

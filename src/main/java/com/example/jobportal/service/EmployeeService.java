@@ -23,7 +23,7 @@ public class EmployeeService {
     public List<Employee> getAllEmployees() { return this.employeeRepository.findAll(); }
 
     //add single employee
-    public void saveEmployee(Employee employee) { employeeRepository.save(employee); }
+    public Employee saveEmployee(Employee employee) { return employeeRepository.save(employee); }
 
     //add list of employees
     public void saveEmployees(List<Employee> employees) { this.employeeRepository.saveAll(employees); }
@@ -31,6 +31,7 @@ public class EmployeeService {
     //delete employee by id
     public void deleteEmployeeById(int id) { this.employeeRepository.deleteById(id); }
 
+    // get employee by id
     public Employee getEmployeeById(int id) {
         Optional<Employee> optional = employeeRepository.findById(id);
         Employee employee;

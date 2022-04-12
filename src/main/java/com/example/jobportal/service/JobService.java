@@ -39,8 +39,8 @@ public class JobService {
     }
 
     //add new job
-    public void addNewJob(Job job) {
-        this.jobRepository.save(job);
+    public Job addNewJob(Job job) {
+        return this.jobRepository.save(job);
     }
 
     //Get job by company
@@ -68,6 +68,5 @@ public class JobService {
     public void applyForJob(UserJob userJob) {
         this.userJobRepository.save(userJob);
     }
-
 
 }

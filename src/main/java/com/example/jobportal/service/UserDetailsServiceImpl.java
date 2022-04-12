@@ -39,9 +39,37 @@ public class UserDetailsServiceImpl {
         return this.userRepository.findAll();
     }
 
+    // get user by id
+    public User getUserById(int id) {
+        return this.userRepository.getById(id);
+    }
+
     // save user
     public void saveUser(User user) {
         this.userRepository.save(user);
     }
 
+    // update user by themselves
+    public User updateUserDetails(User user) {
+        User currentUser = this.userRepository.getById(user.getUser_id());
+        currentUser.setUser_fname(user.getUser_fname());
+        currentUser.setUser_lname(user.getUser_lname());
+        currentUser.setUser_password(user.getUser_password());
+        currentUser.setEmail(user.getEmail());
+        return this.userRepository.getById(user.getUser_id());
+    }
+
+    // update user by admin
+    public User updateUserDetailsByAdmin(User user) {
+        User currentUser = this.userRepository.getById(user.getUser_id());
+        currentUser.setUser_fname(user.getUser_fname());
+        currentUser.setUser_lname(user.getUser_lname());
+        currentUser.setEnabled(user.isEnabled());
+        currentUser.setUser_password(user.getUser_password());
+        currentUser.setEmail(user.getEmail());
+        return this.userRepository.getById(user.getUser_id());
+    }
+
+    // delete user
+    public void removeUser(int id) { this.userRepository.deleteById(id); }
 }

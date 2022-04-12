@@ -1,8 +1,12 @@
 package com.example.jobportal.controller;
 
 import com.example.jobportal.model.Employee;
+import com.example.jobportal.model.Job;
 import com.example.jobportal.service.EmployeeService;
+import com.example.jobportal.service.JobService;
+import com.example.jobportal.service.UserJobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -17,44 +21,37 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    // get list of all employees
-    @GetMapping("/admin/getEmployees")
-    public List<Employee> getListOfEmployees() {
-        return this.employeeService.getAllEmployees();
-    }
+    @Autowired
+    private JobService jobService;
 
-    // Add new employee
-    @PostMapping( path = "/addEmployee",
+    @Autowired
+    private UserJobService userJobService;
+
+    // add a job
+    @PostMapping(path = "/addjob",
             consumes = "application/json",
             produces = "application/json")
-    public List<Employee> saveEmployee(@RequestBody Employee employee) {
-        // save employee to database
-        this.employeeService.saveEmployee(employee);
-        return this.employeeService.getAllEmployees();
+    public Job addNewJob(@RequestBody Job job) {
+        return this.jobService.addNewJob(job);
     }
 
-    // Add new employees
-    @PostMapping( path = "/addEmployees",
-            consumes = "application/json",
-            produces = "application/json")
-    public List<Employee> saveEmployees(@RequestBody List<Employee> employees) {
-        // save employee to database
-        this.employeeService.saveEmployees(employees);
-        return this.employeeService.getAllEmployees();
+    // edit a job
+    @PutMapping(path = "/updatejob")
+    public Job updateJob(@RequestBody Job job, Model model) {
+        return this.jobService.updateJob(job);
     }
 
-    //Delete an employee
-    @DeleteMapping("/admin/deleteEmployee/{id}")
-    public List<Employee> deleteEmployee(@PathVariable (value = "id") int id) {
-        this.employeeService.deleteEmployeeById(id);
-        return this.employeeService.getAllEmployees();
+    // delete job
+    @DeleteMapping(path = "/deletejob/{id}")
+    public List<Job> deleteJob(@PathVariable (value = "id") int id) {
+        this.jobService.deleteJob(id);
+        return this.jobService.getAllJobs();
     }
 
-    // update employee
-    @PutMapping("/admin/updateEmployee")
-    public Employee updateEmployee(@RequestBody Employee employee) {
-        this.employeeService.updateEmployeeDetails(employee);
-        return this.employeeService.getEmployeeById(employee.getEmp_id());
+    //search for users who applied for a job
+    @GetMapping("/appliedUsers/{job_id}")
+    public Object[] getUserListAppliedToAJob(@PathVariable(value = "job_id") int job_id) {
+        return this.userJobService.getUserListAppliedToAJob(job_id);
     }
 
     // send email
@@ -63,5 +60,4 @@ public class EmployeeController {
         this.employeeService.sendmail();
         return "Email sent successfully";
     }
-
 }
