@@ -11,11 +11,6 @@ import java.util.List;
 @Repository
 public interface UserJobRepository extends JpaRepository<UserJob, Integer> {
 
-//    // use join to get full user details - TO DO
-//    @Query("Select user_id, job_id from UserJob uj where uj.job_id = :job_id order by uj.job_id")
-//    Object[] findAllUsersByJobId(@Param("job_id") int job_id);
-
-    // use join to get full user details - TO DO // check it!!!!!!!!!!
-    @Query("Select * from User u inner join UserJob uj on u.user_id = uj.user_id where uj.job_id = :job_id")
+    @Query("Select user_id, job_id from UserJob uj where uj.job_id = :job_id order by uj.job_id")
     Object[] findAllUsersByJobId(@Param("job_id") int job_id);
 }

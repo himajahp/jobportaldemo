@@ -88,7 +88,7 @@ public class AdminController {
     }
 
     // add user
-    @PostMapping( path = "/addUser",
+    @PostMapping( path = "/admin/addUser",
             consumes = "application/json",
             produces = "application/json")
     public List<User> saveUser(@RequestBody User user) {
@@ -100,7 +100,8 @@ public class AdminController {
     // edit user
     @PatchMapping("/admin/updateUser")
     public User updateUser(@RequestBody User user) {
-        return this.userDetailsService.updateUserDetailsByAdmin(user);
+        this.userDetailsService.updateUserDetailsByAdmin(user);
+        return this.userDetailsService.getUserById(user.getUser_id());
     }
 
     // delete user

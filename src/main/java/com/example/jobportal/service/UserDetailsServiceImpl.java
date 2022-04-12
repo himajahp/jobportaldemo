@@ -23,11 +23,13 @@ package com.example.jobportal.service;
 //    }
 //}
 
+import com.example.jobportal.model.Employee;
 import com.example.jobportal.model.User;
 import com.example.jobportal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl {
@@ -40,8 +42,15 @@ public class UserDetailsServiceImpl {
     }
 
     // get user by id
-    public User getUserById(int id) {
-        return this.userRepository.getById(id);
+     public User getUserById(int id) {
+         Optional<User> optional = userRepository.findById(id);
+         User user;
+         if (optional.isPresent()) {
+             user = optional.get();
+         } else {
+             throw new RuntimeException("User not found for id :: " + id);
+         }
+         return user;
     }
 
     // save user
@@ -62,12 +71,14 @@ public class UserDetailsServiceImpl {
     // update user by admin
     public User updateUserDetailsByAdmin(User user) {
         User currentUser = this.userRepository.getById(user.getUser_id());
+        int id = user.getUser_id();
         currentUser.setUser_fname(user.getUser_fname());
         currentUser.setUser_lname(user.getUser_lname());
         currentUser.setEnabled(user.isEnabled());
         currentUser.setUser_password(user.getUser_password());
         currentUser.setEmail(user.getEmail());
-        return this.userRepository.getById(user.getUser_id());
+        return this.userRepository.save(currentUser);
+        //return this.userRepository.getById(user.getUser_id());
     }
 
     // delete user

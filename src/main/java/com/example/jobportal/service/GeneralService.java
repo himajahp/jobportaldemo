@@ -14,7 +14,7 @@ public class GeneralService {
 
     //landing page
     public String viewHomePage() {
-        return "Hello";
+        return "Hello! Welcome to the Job Portal!";
     }
 
     // profile details

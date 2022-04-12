@@ -3,10 +3,9 @@ package com.example.jobportal.controller;
 import com.example.jobportal.model.User;
 import com.example.jobportal.service.GeneralService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class GeneralController {
 
     @Autowired

@@ -1,6 +1,5 @@
 package com.example.jobportal.controller;
 
-import com.example.jobportal.model.Employee;
 import com.example.jobportal.model.Job;
 import com.example.jobportal.service.EmployeeService;
 import com.example.jobportal.service.JobService;
